@@ -16,4 +16,7 @@ class WeeklyFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_weekly, container, false)
     }
+    /*TODO:
+    *  Fetch and Update UI
+    * */
 }

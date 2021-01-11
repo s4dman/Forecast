@@ -4,6 +4,7 @@ import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson
 
 data class TodayModel(
+    val coord: Coord,
     val weather: List<Weather>,
     val main: Main,
     val visibility: String,
@@ -20,6 +21,11 @@ data class TodayModel(
 }
 
 
+data class Coord(
+    val lon: String,
+    val lat: String
+)
+
 data class Weather(
     val main: String,
     val icon: String
@@ -27,9 +33,9 @@ data class Weather(
 
 data class Main(
     val temp: String,
-    val feelsLike: String,
-    val tempMin: String,
-    val tempMax: String,
+    val feels_like: String,
+    val temp_min: String,
+    val temp_max: String,
     val pressure: String,
     val humidity: String
 )
