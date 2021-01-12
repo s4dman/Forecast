@@ -72,9 +72,9 @@
         android:id="@+id/today_weather"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
-        android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
         android:text="Cloudy"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/img_today_weather"
         app:layout_constraintStart_toEndOf="@+id/img_today_weather" />
 

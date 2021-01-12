@@ -7,7 +7,7 @@ data class TodayModel(
     val coord: Coord,
     val weather: List<Weather>,
     val main: Main,
-    val visibility: String,
+    val visibility: Int,
     val wind: Wind,
     val clouds: Clouds,
     val dt: String,
@@ -27,22 +27,22 @@ data class Coord(
 )
 
 data class Weather(
-    val main: String,
+    val description: String,
     val icon: String
 )
 
 data class Main(
-    val temp: String,
-    val feels_like: String,
-    val temp_min: String,
-    val temp_max: String,
-    val pressure: String,
+    val temp: Double,
+    val feels_like: Double,
+    val temp_min: Double,
+    val temp_max: Double,
+    val pressure: Float,
     val humidity: String
 )
 
 data class Wind(
-    val speed: String,
-    val deg: String
+    val speed: Double,
+    val deg: Int
 )
 
 data class Clouds(
