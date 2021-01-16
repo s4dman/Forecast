@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.kittinunf.fuel.Fuel
@@ -36,8 +35,6 @@ class WeeklyFragment : Fragment() {
         val lat: String = Generic.getSharedPref(requireContext(), "lat")
         val lon: String = Generic.getSharedPref(requireContext(), "lon")
 
-        Toast.makeText(context, "$lat - $lon", Toast.LENGTH_SHORT).show()
-
         Fuel.get("${Generic.baseUrl}onecall?lat=$lat&lon=$lon&exclude=current,minutely,hourly&APPID=${Generic.appId}")
             .responseObject(WeeklyModel.Deserializer()) { _, _, result ->
                 val (weeklyModel, _) = result
@@ -55,7 +52,5 @@ class WeeklyFragment : Fragment() {
             adapter = WeeklyAdapter(context, weeklyModel)
         }
     }
-
-
 }
 

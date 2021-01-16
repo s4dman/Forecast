@@ -25,6 +25,6 @@ data class Temp(
 )
 
 data class WeeklyWeather(
-    val description: String,
+    val main: String,
     val icon: String
 )

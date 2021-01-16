@@ -10,6 +10,7 @@ import com.sadmanhasan.forecast.Generic
 import com.sadmanhasan.forecast.R
 import com.sadmanhasan.forecast.model.Daily
 import kotlinx.android.synthetic.main.item_weekly_weather.view.*
+import java.util.*
 
 class WeeklyAdapter(private val context: Context, private val weeklyWeather: List<Daily>) :
     RecyclerView.Adapter<WeeklyAdapter.MyViewHolder>() {
@@ -36,8 +37,8 @@ class WeeklyAdapter(private val context: Context, private val weeklyWeather: Lis
                 .load("https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png")
                 .into(itemView.img_weekly_weather)
             itemView.text_weekly_maxmin.text =
-                "${Generic.tempConvert(data.temp.max)} / ${Generic.tempConvert(data.temp.min)}"
-            itemView.text_weekly_weather.text = data.weather[0].description
+                ("${Generic.tempConvert(data.temp.max)} / ${Generic.tempConvert(data.temp.min)}")
+            itemView.text_weekly_weather.text = data.weather[0].main.capitalize(Locale.getDefault())
 
         }
 
