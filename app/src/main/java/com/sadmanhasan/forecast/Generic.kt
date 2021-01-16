@@ -1,5 +1,6 @@
 package com.sadmanhasan.forecast
 
+import android.content.Context
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
@@ -20,8 +21,26 @@ class Generic {
             return sdf.format(currTimeZone)
         }
 
+        fun formatDate(dt: String): String {
+            val calendar = Calendar.getInstance()
+            val tz = TimeZone.getDefault()
+            calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.timeInMillis))
+            val sdf = SimpleDateFormat("E, dd MMM ", Locale.getDefault())
+            val currTimeZone = Date(dt.toLong() * 1000)
+            return sdf.format(currTimeZone)
+        }
+
         fun tempConvert(temp: Double): String {
             return (temp - 273.15).roundToInt().toString() + " °C"
+        }
+
+        fun setSharedPref(context: Context?, key: String, value: String) {
+            context?.getSharedPreferences(R.string.PREF_NAME.toString(), Context.MODE_PRIVATE)?.edit()?.putString(key, value)?.apply()
+        }
+
+        fun getSharedPref(context: Context, key: String): String {
+            return context.getSharedPreferences(R.string.PREF_NAME.toString(), Context.MODE_PRIVATE)
+                    .getString(key, "")!!
         }
     }
 }
