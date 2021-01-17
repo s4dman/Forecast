@@ -2,10 +2,9 @@ package com.sadmanhasan.forecast.model
 
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 data class WeeklyModel(
-    var daily: List<Daily>
+    val daily: List<Daily>,
 ) {
     class Deserializer : ResponseDeserializable<WeeklyModel> {
         override fun deserialize(content: String): WeeklyModel =
@@ -14,14 +13,19 @@ data class WeeklyModel(
 }
 
 data class Daily(
-    var dt: String,
-    var temp: Temp,
-    var weather: List<WeeklyWeather>
+    val dt: String,
+    val temp: Temp,
+    val weather: List<WeeklyWeather>,
+    val pressure: String,
+    val humidity: String,
+    val wind_speed: String,
+    val pop: String,
+    var expandable: Boolean = false
 )
 
 data class Temp(
-    var min: Double,
-    var max: Double
+    val min: Double,
+    val max: Double
 )
 
 data class WeeklyWeather(

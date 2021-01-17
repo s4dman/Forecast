@@ -2,8 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_weekly_main_view"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:animationCache="true">
 
     <TextView
         android:id="@+id/text_weekly_date"
@@ -11,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Fri Jan 15"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toStartOf="@+id/img_weekly_weather"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +38,7 @@
         android:layout_height="wrap_content"
         android:text="10 / 6` C"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/img_weekly_weather"
@@ -67,4 +70,109 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_weekly_weather" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/expandable_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBg"
+        android:visibility="gone"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider2">
+
+        <TextView
+            android:id="@+id/label_weekly_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Humidity"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/text_weekly_humidity"
+            app:layout_constraintStart_toStartOf="@+id/text_weekly_humidity"
+            app:layout_constraintTop_toBottomOf="@+id/text_weekly_humidity" />
+
+        <TextView
+            android:id="@+id/text_weekly_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="80%"
+            android:textColor="@color/lightText"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/text_weekly_percp"
+            app:layout_constraintStart_toStartOf="@+id/text_weekly_percp"
+            app:layout_constraintTop_toBottomOf="@+id/label_weekly_percp" />
+
+        <TextView
+            android:id="@+id/label_weekly_percp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Percipitation"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/text_weekly_percp"
+            app:layout_constraintStart_toStartOf="@+id/text_weekly_percp"
+            app:layout_constraintTop_toBottomOf="@+id/text_weekly_percp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wind"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/label_weekly_percp"
+            app:layout_constraintEnd_toEndOf="@+id/text_weekly_wind"
+            app:layout_constraintStart_toStartOf="@+id/text_weekly_wind" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pressure"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/label_weekly_humidity"
+            app:layout_constraintEnd_toEndOf="@+id/text_weekly_pressure"
+            app:layout_constraintStart_toStartOf="@+id/text_weekly_pressure" />
+
+        <TextView
+            android:id="@+id/text_weekly_percp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="65%"
+            android:textColor="@color/lightText"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/text_weekly_wind"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_weekly_wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8 km/h"
+            android:textColor="@color/lightText"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_weekly_percp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/text_weekly_percp" />
+
+        <TextView
+            android:id="@+id/text_weekly_pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="940 hPa"
+            android:textColor="@color/lightText"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/text_weekly_humidity"
+            app:layout_constraintEnd_toEndOf="@+id/text_weekly_wind"
+            app:layout_constraintStart_toStartOf="@+id/text_weekly_wind" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
