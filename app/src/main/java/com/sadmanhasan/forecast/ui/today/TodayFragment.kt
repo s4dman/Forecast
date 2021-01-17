@@ -79,7 +79,7 @@ class TodayFragment : Fragment() {
                         arrayOf("↑N", "↗NE", "→E", "↘SE", "↓S", "↙SW", "←W", "↖NW")
                     val wind = ((todayModel.wind.deg / 45).toDouble().roundToInt() % 8)
                     today_wind.text = ((todayModel.wind.speed * 3.6).roundToInt()
-                        .toString() + " kph " + windDir[wind])
+                        .toString() + " km/h " + windDir[wind])
 
                     today_humidity.text = (todayModel.main.humidity + "%")
                     today_visibility.text =
