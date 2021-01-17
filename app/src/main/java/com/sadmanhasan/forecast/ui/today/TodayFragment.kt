@@ -26,18 +26,18 @@ class TodayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_today, container, false)
+        return inflater.inflate(R.layout.fragment_today_new, container, false)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btn_search.setOnClickListener {
-            val city: String = edit_city_name.text.toString()
-            getCurrentWeather(city)
-
-        }
+//        btn_search.setOnClickListener {
+//            val city: String = edit_city_name.text.toString()
+//            getCurrentWeather(city)
+//
+//        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -55,12 +55,12 @@ class TodayFragment : Fragment() {
 
                     Glide.with(this)
                         .load("https://openweathermap.org/img/wn/$icon@4x.png")
-                        .into(img_today_weather)
+                        .into(img_today_weather1)
 
                     val current = LocalDateTime.now()
                     val formatter = DateTimeFormatter.ofPattern("EEEE hh:mm a, MMMM d, y")
                     val formatted = current.format(formatter)
-                    today_date.text = formatted
+                    text_today_date.text = formatted
 
                     today_temp.text = Generic.tempConvert(todayModel.main.temp)
                     today_weather.text = todayModel.weather[0].description
