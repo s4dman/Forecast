@@ -64,7 +64,7 @@ class TodayFragment : Fragment() {
                         .into(img_today_weather)
 
                     val current = LocalDateTime.now()
-                    val formatter = DateTimeFormatter.ofPattern("EEEE hh:mm a, MMMM d, y")
+                    val formatter = DateTimeFormatter.ofPattern("EEEE, d MMM ")
                     val formatted = current.format(formatter)
                     text_today_date.text = formatted
 
