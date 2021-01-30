@@ -31,7 +31,7 @@ class Generic {
         }
 
         fun tempConvert(temp: Double): String {
-            return (temp - 273.15).roundToInt().toString() + " °C"
+            return (temp - 273.15).roundToInt().toString() + "°C"
         }
 
         fun setSharedPref(context: Context?, key: String, value: String) {

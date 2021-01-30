@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
-import com.github.kittinunf.fuel.Fuel
 import com.sadmanhasan.forecast.Generic
 import com.sadmanhasan.forecast.MainActivity
 import com.sadmanhasan.forecast.R
@@ -23,10 +23,11 @@ import kotlin.math.roundToInt
 
 class TodayFragment : Fragment() {
 
-    private val todayRepository = TodayRepository()
+    private val viewModel: TodayViewModel by viewModels()
 
     companion object {
-        var cityName: String = ""
+        private var cityName: String = ""
+        private var location: String = ""
     }
 
     override fun onCreateView(
@@ -44,17 +45,20 @@ class TodayFragment : Fragment() {
         cityName = Generic.getSharedPref(requireContext(), "city_name")
 
         if (activity != null) {
-            (activity as MainActivity).supportActionBar?.title = cityName
+            (activity as MainActivity).supportActionBar?.title = location
         }
 
-        todayRepository.getCurrentWeather(cityName)
-        todayRepository.todayForecast.observe(viewLifecycleOwner, Observer {
+        viewModel.getCurrentData(cityName)
+        viewModel.todayForecast.observe(viewLifecycleOwner, Observer {
             parseData(it)
         })
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun parseData(todayModel: TodayModel) {
+
+        Generic.setSharedPref(context, "location", todayModel.name + ", " + todayModel.sys.country).toString()
+        location = Generic.getSharedPref(requireContext(), "location")
 
         Generic.setSharedPref(requireContext(), "lat", todayModel.coord.lat)
         Generic.setSharedPref(requireContext(), "lon", todayModel.coord.lon)
