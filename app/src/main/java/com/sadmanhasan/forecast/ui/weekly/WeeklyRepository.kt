@@ -20,7 +20,7 @@ class WeeklyRepository() {
                     if (weeklyModel != null) {
                         /* Dropping today's(first) weather data, as we need next 7 days data */
                         val data = weeklyModel.daily.drop(1)
-                        _weeklyForecast.setValue(data)
+                        _weeklyForecast.value = data
                     }
                 }
     }

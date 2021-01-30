@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
-import com.github.kittinunf.fuel.Fuel
 import com.sadmanhasan.forecast.Generic
 import com.sadmanhasan.forecast.MainActivity
 import com.sadmanhasan.forecast.R
@@ -23,7 +23,7 @@ import kotlin.math.roundToInt
 
 class TodayFragment : Fragment() {
 
-    private val todayRepository = TodayRepository()
+    private val viewModel: TodayViewModel by viewModels()
 
     companion object {
         var cityName: String = ""
@@ -47,8 +47,8 @@ class TodayFragment : Fragment() {
             (activity as MainActivity).supportActionBar?.title = cityName
         }
 
-        todayRepository.getCurrentWeather(cityName)
-        todayRepository.todayForecast.observe(viewLifecycleOwner, Observer {
+        viewModel.getCurrentWeather(cityName)
+        viewModel.todayForecast.observe(viewLifecycleOwner, Observer {
             parseData(it)
         })
     }
