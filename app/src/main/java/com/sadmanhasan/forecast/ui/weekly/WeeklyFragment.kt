@@ -11,15 +11,17 @@ import com.sadmanhasan.forecast.Generic
 import com.sadmanhasan.forecast.MainActivity
 import com.sadmanhasan.forecast.R
 import com.sadmanhasan.forecast.model.Daily
+import com.sadmanhasan.forecast.ui.today.TodayFragment
 import kotlinx.android.synthetic.main.fragment_weekly.*
 
 
 class WeeklyFragment : Fragment() {
 
-    private val weeklyRepository = WeeklyRepository()
+    private val viewModel = WeeklyViewModel()
 
     companion object {
-        var cityName: String = ""
+        private var cityName: String = ""
+        private var location: String = ""
     }
 
     override fun onCreateView(
@@ -34,16 +36,17 @@ class WeeklyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         cityName = Generic.getSharedPref(requireContext(), "city_name")
+        location = Generic.getSharedPref(requireContext(), "location")
 
         if (activity != null) {
-            (activity as MainActivity).supportActionBar?.title = cityName
+            (activity as MainActivity).supportActionBar?.title = location
         }
 
         val lat: String = Generic.getSharedPref(requireContext(), "lat")
         val lon: String = Generic.getSharedPref(requireContext(), "lon")
 
-        weeklyRepository.getWeeklyData(lat, lon)
-        weeklyRepository.weeklyForecast.observe(viewLifecycleOwner, Observer {
+        viewModel.getWeeklyData(lat, lon)
+        viewModel.weeklyForecast.observe(viewLifecycleOwner, Observer {
             initWeeklyRecyclerView(it)
         })
     }

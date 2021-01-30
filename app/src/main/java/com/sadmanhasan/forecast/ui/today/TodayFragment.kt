@@ -26,7 +26,8 @@ class TodayFragment : Fragment() {
     private val viewModel: TodayViewModel by viewModels()
 
     companion object {
-        var cityName: String = ""
+        private var cityName: String = ""
+        private var location: String = ""
     }
 
     override fun onCreateView(
@@ -44,10 +45,10 @@ class TodayFragment : Fragment() {
         cityName = Generic.getSharedPref(requireContext(), "city_name")
 
         if (activity != null) {
-            (activity as MainActivity).supportActionBar?.title = cityName
+            (activity as MainActivity).supportActionBar?.title = location
         }
 
-        viewModel.getCurrentWeather(cityName)
+        viewModel.getCurrentData(cityName)
         viewModel.todayForecast.observe(viewLifecycleOwner, Observer {
             parseData(it)
         })
@@ -55,6 +56,9 @@ class TodayFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun parseData(todayModel: TodayModel) {
+
+        Generic.setSharedPref(context, "location", todayModel.name + ", " + todayModel.sys.country).toString()
+        location = Generic.getSharedPref(requireContext(), "location")
 
         Generic.setSharedPref(requireContext(), "lat", todayModel.coord.lat)
         Generic.setSharedPref(requireContext(), "lon", todayModel.coord.lon)

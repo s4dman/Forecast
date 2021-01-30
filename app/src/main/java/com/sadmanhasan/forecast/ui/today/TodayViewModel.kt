@@ -13,9 +13,9 @@ class TodayViewModel : ViewModel() {
     private val _todayForecast = MutableLiveData<TodayModel>()
     val todayForecast: LiveData<TodayModel> = _todayForecast
 
-    fun getCurrentWeather(cityName: String) {
-        todayRepository.getCurrentWeather(cityName) {
-            _todayForecast.value = it
+    fun getCurrentData(cityName: String) {
+        todayRepository.getCurrentWeather(cityName) { data ->
+            _todayForecast.value = data
         }
     }
 }
