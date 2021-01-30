@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_weekly.*
 
 class WeeklyFragment : Fragment() {
 
-    private val weeklyRepository = WeeklyRepository()
+    private val viewModel = WeeklyViewModel()
 
     companion object {
         var cityName: String = ""
@@ -42,8 +42,8 @@ class WeeklyFragment : Fragment() {
         val lat: String = Generic.getSharedPref(requireContext(), "lat")
         val lon: String = Generic.getSharedPref(requireContext(), "lon")
 
-        weeklyRepository.getWeeklyData(lat, lon)
-        weeklyRepository.weeklyForecast.observe(viewLifecycleOwner, Observer {
+        viewModel.getWeeklyData(lat, lon)
+        viewModel.weeklyForecast.observe(viewLifecycleOwner, Observer {
             initWeeklyRecyclerView(it)
         })
     }

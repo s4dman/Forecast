@@ -47,7 +47,7 @@ class TodayFragment : Fragment() {
             (activity as MainActivity).supportActionBar?.title = cityName
         }
 
-        viewModel.getCurrentWeather(cityName)
+        viewModel.getCurrentData(cityName)
         viewModel.todayForecast.observe(viewLifecycleOwner, Observer {
             parseData(it)
         })
