@@ -41,6 +41,7 @@ class WeeklyAdapter(private val context: Context, private val weeklyWeather: Lis
             Glide.with(context)
                 .load("https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png")
                 .into(itemView.img_weekly_weather)
+
             itemView.text_weekly_maxmin.text =
                 ("${Generic.tempConvert(data.temp.max)} / ${Generic.tempConvert(data.temp.min)}")
             itemView.text_weekly_weather.text = data.weather[0].main.capitalize(Locale.getDefault())
@@ -63,7 +64,7 @@ class WeeklyAdapter(private val context: Context, private val weeklyWeather: Lis
                 }
             }
 
-            applyLayoutTransition(itemView)
+            applyLayoutTransition(itemView) //Item onClick expand
         }
     }
 
