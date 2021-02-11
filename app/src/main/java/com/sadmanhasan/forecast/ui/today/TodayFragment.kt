@@ -17,8 +17,6 @@ import com.sadmanhasan.forecast.R
 import com.sadmanhasan.forecast.model.Hourly
 import com.sadmanhasan.forecast.model.TodayModel
 import kotlinx.android.synthetic.main.fragment_today.*
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -84,10 +82,8 @@ class TodayFragment : Fragment() {
                 .load("https://openweathermap.org/img/wn/$icon@4x.png")
                 .into(img_today_weather)
 
-        val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("EEEE, d MMM ")
-        val formatted = current.format(formatter)
-        text_today_date.text = formatted
+        text_today_date.text = Generic.formatTime(todayModel.dt + todayModel.timezone, "hh:mm a, EEEE, d MMM ")
+
 
         text_today_temp.text = Generic.tempConvert(todayModel.main.temp)
         text_today_weather.text = todayModel.weather[0].description.capitalize(Locale.ROOT)
@@ -99,8 +95,9 @@ class TodayFragment : Fragment() {
                         todayModel.main.temp_min
                 ))
 
-        text_today_sunrise.text = Generic.formatTime(todayModel.sys.sunrise, "hh:mm a").toLowerCase(Locale.ROOT)
-        text_today_sunset.text = Generic.formatTime(todayModel.sys.sunset, "hh:mm a").toLowerCase(Locale.ROOT)
+        Generic.setSharedPref(requireContext(), "timezone", todayModel.timezone.toString())
+        text_today_sunrise.text = Generic.formatTime(todayModel.sys.sunrise + todayModel.timezone, "hh:mm a").toLowerCase(Locale.ROOT)
+        text_today_sunset.text = Generic.formatTime(todayModel.sys.sunset + todayModel.timezone, "hh:mm a").toLowerCase(Locale.ROOT)
 
         val windDir =
                 arrayOf("↑N", "↗NE", "→E", "↘SE", "↓S", "↙SW", "←W", "↖NW")

@@ -4,7 +4,7 @@ import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson
 
 data class HourlyModel(
-        val hourly: List<Hourly>
+        val hourly: List<Hourly>,
 ) {
     class Deserializer : ResponseDeserializable<HourlyModel> {
         override fun deserialize(content: String): HourlyModel =
@@ -13,7 +13,7 @@ data class HourlyModel(
 }
 
 data class Hourly(
-        val dt: String,
+        val dt: Long,
         val temp: Double,
         val weather: List<HourlyWeather>,
 )
