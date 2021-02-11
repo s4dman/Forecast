@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,13 +14,9 @@ import com.bumptech.glide.Glide
 import com.sadmanhasan.forecast.Generic
 import com.sadmanhasan.forecast.MainActivity
 import com.sadmanhasan.forecast.R
-import com.sadmanhasan.forecast.model.Daily
 import com.sadmanhasan.forecast.model.Hourly
-import com.sadmanhasan.forecast.model.HourlyModel
 import com.sadmanhasan.forecast.model.TodayModel
-import com.sadmanhasan.forecast.ui.weekly.WeeklyAdapter
 import kotlinx.android.synthetic.main.fragment_today.*
-import kotlinx.android.synthetic.main.fragment_weekly.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*

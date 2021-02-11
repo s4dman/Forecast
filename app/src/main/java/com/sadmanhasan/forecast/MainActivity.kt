@@ -27,12 +27,16 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_today, R.id.navigation_weekly
-            )
+                setOf(
+                        R.id.navigation_today, R.id.navigation_weekly
+                )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onBackPressed() {
+        finishAffinity()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -57,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY)
             if (query.isNullOrEmpty()) Toast.makeText(this, "Enter a city name", Toast.LENGTH_SHORT)
-                .show() else Generic.setSharedPref(this, "city_name", query.toString())
+                    .show() else Generic.setSharedPref(this, "city_name", query.toString())
         }
     }
 }
