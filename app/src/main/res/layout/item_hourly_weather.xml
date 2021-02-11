@@ -2,42 +2,38 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="60dp"
-    android:layout_height="wrap_content">
+    android:layout_width="70dp"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/text_hourly_time"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="19dp"
         android:text="12 PM"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/img_hourly_weather"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/img_hourly_weather"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_hourly_time"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_cloud_24" />
 
     <TextView
         android:id="@+id/text_hourly_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="-1`"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

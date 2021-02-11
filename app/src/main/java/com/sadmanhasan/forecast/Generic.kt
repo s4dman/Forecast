@@ -17,7 +17,6 @@ class Generic {
             val tz = TimeZone.getDefault()
             calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.timeInMillis))
             val sdf = SimpleDateFormat(pattern, Locale.getDefault())
-//            val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
             val currTimeZone = Date(dt.toLong() * 1000)
             return sdf.format(currTimeZone)
         }

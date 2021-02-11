@@ -51,14 +51,15 @@ class TodayFragment : Fragment() {
 
         cityName = Generic.getSharedPref(requireContext(), "city_name")
 
-        if (activity != null) {
-            (activity as MainActivity).supportActionBar?.title = location
-        }
-
         viewModel.getCurrentData(cityName)
+
         viewModel.todayForecast.observe(viewLifecycleOwner, Observer {
             parseData(it)
         })
+
+        if (activity != null) {
+            (activity as MainActivity).supportActionBar?.title = location
+        }
 
         viewModel.getHourlyData(Generic.getSharedPref(requireContext(), "lat"), Generic.getSharedPref(requireContext(), "lon"))
         viewModel.hourlyForecast.observe(viewLifecycleOwner, Observer {
@@ -103,8 +104,8 @@ class TodayFragment : Fragment() {
                         todayModel.main.temp_min
                 ))
 
-        text_today_sunrise.text = Generic.formatTime(todayModel.sys.sunrise, "hh:mm a")
-        text_today_sunset.text = Generic.formatTime(todayModel.sys.sunset, "hh:mm a")
+        text_today_sunrise.text = Generic.formatTime(todayModel.sys.sunrise, "hh:mm a").toLowerCase(Locale.ROOT)
+        text_today_sunset.text = Generic.formatTime(todayModel.sys.sunset, "hh:mm a").toLowerCase(Locale.ROOT)
 
         val windDir =
                 arrayOf("↑N", "↗NE", "→E", "↘SE", "↓S", "↙SW", "←W", "↖NW")

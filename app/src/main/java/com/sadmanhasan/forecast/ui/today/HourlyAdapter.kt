@@ -10,7 +10,6 @@ import com.sadmanhasan.forecast.Generic
 import com.sadmanhasan.forecast.R
 import com.sadmanhasan.forecast.model.Hourly
 import kotlinx.android.synthetic.main.item_hourly_weather.view.*
-import kotlinx.android.synthetic.main.item_weekly_weather.view.*
 import java.util.*
 
 class HourlyAdapter(private val context: Context, private val hourlyWeather: List<Hourly>) : RecyclerView.Adapter<HourlyAdapter.ViewHolder>() {
