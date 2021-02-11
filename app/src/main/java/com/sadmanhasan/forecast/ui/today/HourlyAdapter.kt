@@ -20,7 +20,7 @@ class HourlyAdapter(private val context: Context, private val hourlyWeather: Lis
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val data = hourlyWeather[position]
+        val data = hourlyWeather.drop(0)[position]
         holder.setData(data)
     }
 
@@ -31,7 +31,10 @@ class HourlyAdapter(private val context: Context, private val hourlyWeather: Lis
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun setData(data: Hourly) {
-            itemView.text_hourly_time.text = Generic.formatTime(data.dt, "ha").toLowerCase(Locale.ROOT)
+
+            val timezone = Generic.getSharedPref(context, "timezone").toLong()
+
+            itemView.text_hourly_time.text = Generic.formatTime(data.dt + timezone, "ha").toLowerCase(Locale.ROOT)
             Glide.with(context)
                     .load("https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png")
                     .into(itemView.img_hourly_weather)
