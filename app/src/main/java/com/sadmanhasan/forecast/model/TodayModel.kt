@@ -20,7 +20,6 @@ data class TodayModel(
     }
 }
 
-
 data class Coord(
     val lon: String,
     val lat: String

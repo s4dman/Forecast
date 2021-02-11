@@ -12,11 +12,11 @@ class Generic {
         const val baseUrl: String = "https://api.openweathermap.org/data/2.5/"
         const val appId: String = "9cd7f16ef1ce56b903a9fdd168e7952f"
 
-        fun formatTime(dt: String): String {
+        fun formatTime(dt: String, pattern: String): String {
             val calendar = Calendar.getInstance()
             val tz = TimeZone.getDefault()
             calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.timeInMillis))
-            val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+            val sdf = SimpleDateFormat(pattern, Locale.getDefault())
             val currTimeZone = Date(dt.toLong() * 1000)
             return sdf.format(currTimeZone)
         }

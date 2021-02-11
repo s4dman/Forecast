@@ -9,10 +9,12 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.sadmanhasan.forecast.Generic
 import com.sadmanhasan.forecast.MainActivity
 import com.sadmanhasan.forecast.R
+import com.sadmanhasan.forecast.model.Hourly
 import com.sadmanhasan.forecast.model.TodayModel
 import kotlinx.android.synthetic.main.fragment_today.*
 import java.time.LocalDateTime
@@ -44,14 +46,27 @@ class TodayFragment : Fragment() {
 
         cityName = Generic.getSharedPref(requireContext(), "city_name")
 
+        viewModel.getCurrentData(cityName)
+
+        viewModel.todayForecast.observe(viewLifecycleOwner, Observer {
+            parseData(it)
+        })
+
         if (activity != null) {
             (activity as MainActivity).supportActionBar?.title = location
         }
 
-        viewModel.getCurrentData(cityName)
-        viewModel.todayForecast.observe(viewLifecycleOwner, Observer {
-            parseData(it)
+        viewModel.getHourlyData(Generic.getSharedPref(requireContext(), "lat"), Generic.getSharedPref(requireContext(), "lon"))
+        viewModel.hourlyForecast.observe(viewLifecycleOwner, Observer {
+            initWeeklyRecyclerView(it)
         })
+    }
+
+    private fun initWeeklyRecyclerView(hourlyModel: List<Hourly>) {
+        recycler_hourly.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = HourlyAdapter(context, hourlyModel)
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -84,8 +99,8 @@ class TodayFragment : Fragment() {
                         todayModel.main.temp_min
                 ))
 
-        text_today_sunrise.text = Generic.formatTime(todayModel.sys.sunrise)
-        text_today_sunset.text = Generic.formatTime(todayModel.sys.sunset)
+        text_today_sunrise.text = Generic.formatTime(todayModel.sys.sunrise, "hh:mm a").toLowerCase(Locale.ROOT)
+        text_today_sunset.text = Generic.formatTime(todayModel.sys.sunset, "hh:mm a").toLowerCase(Locale.ROOT)
 
         val windDir =
                 arrayOf("↑N", "↗NE", "→E", "↘SE", "↓S", "↙SW", "←W", "↖NW")
