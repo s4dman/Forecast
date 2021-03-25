@@ -1,6 +1,8 @@
 package com.sadmanhasan.forecast
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -14,11 +16,13 @@ class Generic {
         const val baseUrl: String = "https://api.openweathermap.org/data/2.5/"
         const val appId: String = "9cd7f16ef1ce56b903a9fdd168e7952f"
 
+        @RequiresApi(Build.VERSION_CODES.O)
         fun formatTime(dt: Long, pattern: String): String {
 
             val daTime = java.time.format.DateTimeFormatter.ISO_INSTANT
-                    .format(java.time.Instant.ofEpochSecond(dt)).toString()
-            return OffsetDateTime.parse(daTime).format(DateTimeFormatter.ofPattern(pattern, Locale.ENGLISH));
+                .format(java.time.Instant.ofEpochSecond(dt)).toString()
+            return OffsetDateTime.parse(daTime)
+                .format(DateTimeFormatter.ofPattern(pattern, Locale.ENGLISH));
         }
 
         fun formatDate(dt: String): String {
@@ -35,12 +39,13 @@ class Generic {
         }
 
         fun setSharedPref(context: Context?, key: String, value: String) {
-            context?.getSharedPreferences(R.string.PREF_NAME.toString(), Context.MODE_PRIVATE)?.edit()?.putString(key, value)?.apply()
+            context?.getSharedPreferences(R.string.PREF_NAME.toString(), Context.MODE_PRIVATE)
+                ?.edit()?.putString(key, value)?.apply()
         }
 
         fun getSharedPref(context: Context, key: String): String {
             return context.getSharedPreferences(R.string.PREF_NAME.toString(), Context.MODE_PRIVATE)
-                    .getString(key, "")!!
+                .getString(key, "")!!
         }
     }
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sadmanhasan.forecast.model.Hourly
-import com.sadmanhasan.forecast.model.HourlyModel
 import com.sadmanhasan.forecast.model.TodayModel
 
 

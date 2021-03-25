@@ -50,10 +50,6 @@ class TodayFragment : Fragment() {
             parseData(it)
         })
 
-        if (activity != null) {
-            (activity as MainActivity).supportActionBar?.title = location
-        }
-
         viewModel.getHourlyData(Generic.getSharedPref(requireContext(), "lat"), Generic.getSharedPref(requireContext(), "lon"))
         viewModel.hourlyForecast.observe(viewLifecycleOwner, Observer {
             initWeeklyRecyclerView(it)
@@ -72,6 +68,10 @@ class TodayFragment : Fragment() {
 
         Generic.setSharedPref(context, "location", todayModel.name + ", " + todayModel.sys.country).toString()
         location = Generic.getSharedPref(requireContext(), "location")
+
+        if (activity != null) {
+            (activity as MainActivity).supportActionBar?.title = location
+        }
 
         Generic.setSharedPref(requireContext(), "lat", todayModel.coord.lat)
         Generic.setSharedPref(requireContext(), "lon", todayModel.coord.lon)
