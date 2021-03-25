@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -50,10 +51,6 @@ class TodayFragment : Fragment() {
             parseData(it)
         })
 
-        if (activity != null) {
-            (activity as MainActivity).supportActionBar?.title = location
-        }
-
         viewModel.getHourlyData(Generic.getSharedPref(requireContext(), "lat"), Generic.getSharedPref(requireContext(), "lon"))
         viewModel.hourlyForecast.observe(viewLifecycleOwner, Observer {
             initWeeklyRecyclerView(it)
@@ -72,6 +69,10 @@ class TodayFragment : Fragment() {
 
         Generic.setSharedPref(context, "location", todayModel.name + ", " + todayModel.sys.country).toString()
         location = Generic.getSharedPref(requireContext(), "location")
+
+        if (activity != null) {
+            (activity as MainActivity).supportActionBar?.title = location
+        }
 
         Generic.setSharedPref(requireContext(), "lat", todayModel.coord.lat)
         Generic.setSharedPref(requireContext(), "lon", todayModel.coord.lon)
