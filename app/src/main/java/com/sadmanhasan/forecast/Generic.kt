@@ -15,6 +15,7 @@ class Generic {
 
         const val baseUrl: String = "https://api.openweathermap.org/data/2.5/"
         const val appId: String = "9cd7f16ef1ce56b903a9fdd168e7952f"
+        const val PERMISSION_REQUEST_ACCESS_LOCATION = 100
 
         @RequiresApi(Build.VERSION_CODES.O)
         fun formatTime(dt: Long, pattern: String): String {
